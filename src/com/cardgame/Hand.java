@@ -34,7 +34,7 @@ public class Hand {
 
     public Stack<Card> getOrderedCards() {
         Collections.sort(cards);
-        return cards;
+        return (Stack<Card>) cards.clone();
     }
 
     public boolean hasThreeOfAKind(){

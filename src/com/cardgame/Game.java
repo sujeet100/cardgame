@@ -1,21 +1,21 @@
 package com.cardgame;
 
+import java.util.List;
+
 /**
  * Created by maverick on 5/12/15.
  */
 public class Game {
-    private Player player1;
-    private Player player2;
+    private List<Player> players;
 
-    public Game(Player player1, Player player2) {
-        this.player1 = player1;
-        this.player2 = player2;
+    public Game(List<Player> players) {
+        this.players = players;
     }
 
     public GameResult play(){
         GameRule threeOfAKind = new ThreeOfAKind();
         GameRule highCard = new HighCard();
         threeOfAKind.setNext(highCard);
-        return threeOfAKind.apply(player1, player2);
+        return threeOfAKind.apply(players);
     }
 }

@@ -1,5 +1,7 @@
 package com.cardgame;
 
+import java.util.Collections;
+
 /**
  * Created by maverick on 5/12/15.
  */
@@ -44,5 +46,9 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public boolean hasSameHand(Player second) {
+        return this.hand.getCards().equals(second.getHand().getCards());
     }
 }

@@ -4,6 +4,9 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by maverick on 5/12/15.
  */
@@ -11,8 +14,14 @@ public class GameTest {
     @Test
     public void thePlayerWithGreaterRankHighCardWins(){
 
-        Player john = new Player("John");
-        Player bob = new Player("Bob");
+        final Player john = new Player("John");
+        final Player bob = new Player("Bob");
+        List<Player> players = new ArrayList<Player>(){
+            {
+                add(john);
+                add(bob);
+            }
+        };
 
 
         Hand player1Hand = new Hand(3);
@@ -27,19 +36,24 @@ public class GameTest {
         player2Hand.addCard(new Card(Rank.EIGHT, Suit.DIAMOND));
         bob.setHand(player2Hand);
 
-        Game game = new Game(john, bob);
+        Game game = new Game(players);
         
         GameResult result = game.play();
         Assert.assertThat(result.getWinner(), CoreMatchers.is(john));
-        Assert.assertThat(result.getResultMessage(), CoreMatchers.is("John has won by high card: JACK - DIAMOND"));
+        Assert.assertThat(result.getResultMessage(), CoreMatchers.is("John has won by high card: JACK - HEART"));
     }
 
     @Test
     public void thePlayerWithGreaterSuitWinsIfBothOfThemHaveSameRankHighCardAsHighestRankCard(){
 
-        Player john = new Player("John");
-        Player bob = new Player("Bob");
-
+        final Player john = new Player("John");
+        final Player bob = new Player("Bob");
+        List<Player> players = new ArrayList<Player>(){
+            {
+                add(john);
+                add(bob);
+            }
+        };
 
         Hand player1Hand = new Hand(3);
         player1Hand.addCard(new Card(Rank.TEN, Suit.CLUB));
@@ -53,7 +67,7 @@ public class GameTest {
         player2Hand.addCard(new Card(Rank.JACK, Suit.SPADE));
         bob.setHand(player2Hand);
 
-        Game game = new Game(john, bob);
+        Game game = new Game(players);
 
         GameResult result = game.play();
         Assert.assertThat(result.getWinner(), CoreMatchers.is(bob));
@@ -63,8 +77,14 @@ public class GameTest {
     @Test
     public void ifBothPlayersHaveTheSameHighCardNextCardShouldBeCompared(){
 
-        Player john = new Player("John");
-        Player bob = new Player("Bob");
+        final Player john = new Player("John");
+        final Player bob = new Player("Bob");
+        List<Player> players = new ArrayList<Player>(){
+            {
+                add(john);
+                add(bob);
+            }
+        };
 
 
         Hand player1Hand = new Hand(3);
@@ -79,7 +99,7 @@ public class GameTest {
         player2Hand.addCard(new Card(Rank.JACK, Suit.SPADE));
         bob.setHand(player2Hand);
 
-        Game game = new Game(john, bob);
+        Game game = new Game(players);
 
         GameResult result = game.play();
         Assert.assertThat(result.getWinner(), CoreMatchers.is(john));
@@ -89,8 +109,14 @@ public class GameTest {
     @Test
     public void playerWithThreeOfAKindWinsEvenThoughHeHasNotGotAHighCard(){
 
-        Player john = new Player("John");
-        Player bob = new Player("Bob");
+        final Player john = new Player("John");
+        final Player bob = new Player("Bob");
+        List<Player> players = new ArrayList<Player>(){
+            {
+                add(john);
+                add(bob);
+            }
+        };
 
 
         Hand player1Hand = new Hand(3);
@@ -105,7 +131,7 @@ public class GameTest {
         player2Hand.addCard(new Card(Rank.ACE, Suit.SPADE));
         bob.setHand(player2Hand);
 
-        Game game = new Game(john, bob);
+        Game game = new Game(players);
 
         GameResult result = game.play();
         Assert.assertThat(result.getWinner(), CoreMatchers.is(john));
@@ -115,8 +141,14 @@ public class GameTest {
     @Test
     public void playerWithHigherThreeOfAKindWins(){
 
-        Player john = new Player("John");
-        Player bob = new Player("Bob");
+        final Player john = new Player("John");
+        final Player bob = new Player("Bob");
+        List<Player> players = new ArrayList<Player>(){
+            {
+                add(john);
+                add(bob);
+            }
+        };
 
 
         Hand player1Hand = new Hand(3);
@@ -131,7 +163,7 @@ public class GameTest {
         player2Hand.addCard(new Card(Rank.QUEEN, Suit.SPADE));
         bob.setHand(player2Hand);
 
-        Game game = new Game(john, bob);
+        Game game = new Game(players);
 
         GameResult result = game.play();
         Assert.assertThat(result.getWinner(), CoreMatchers.is(bob));
@@ -141,8 +173,14 @@ public class GameTest {
     @Test
     public void playerWithHighCardWinsIfBothPlayersHaveThreeOfAKindOfSameRank(){
 
-        Player john = new Player("John");
-        Player jack = new Player("Bob");
+        final Player john = new Player("John");
+        final Player bob = new Player("Bob");
+        List<Player> players = new ArrayList<Player>(){
+            {
+                add(john);
+                add(bob);
+            }
+        };
 
 
         Hand player1Hand = new Hand(5);
@@ -159,9 +197,9 @@ public class GameTest {
         player2Hand.addCard(new Card(Rank.TEN, Suit.SPADE));
         player2Hand.addCard(new Card(Rank.JACK, Suit.SPADE));
         player2Hand.addCard(new Card(Rank.QUEEN, Suit.SPADE));
-        jack.setHand(player2Hand);
+        bob.setHand(player2Hand);
 
-        Game game = new Game(john, jack);
+        Game game = new Game(players);
 
         GameResult result = game.play();
         Assert.assertThat(result.getWinner(), CoreMatchers.is(john));
@@ -170,8 +208,14 @@ public class GameTest {
     @Test
     public void gameIsDrawnIfNoneOfTheRuleCanDecideTheWinner(){
 
-        Player john = new Player("John");
-        Player bob = new Player("Bob");
+        final Player john = new Player("John");
+        final Player bob = new Player("Bob");
+        List<Player> players = new ArrayList<Player>(){
+            {
+                add(john);
+                add(bob);
+            }
+        };
 
 
         Hand player1Hand = new Hand(5);
@@ -190,7 +234,7 @@ public class GameTest {
         player2Hand.addCard(new Card(Rank.ACE, Suit.SPADE));
         bob.setHand(player2Hand);
 
-        Game game = new Game(john, bob);
+        Game game = new Game(players);
 
         GameResult result = game.play();
         Assert.assertThat(result.getWinner(), CoreMatchers.is(Player.NONE));
