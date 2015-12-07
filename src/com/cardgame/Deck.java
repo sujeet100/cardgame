@@ -1,0 +1,26 @@
+package com.cardgame;
+
+import java.util.Collections;
+import java.util.Stack;
+
+/**
+ * Created by maverick on 5/12/15.
+ */
+public class Deck {
+    Stack<Card> cards = new Stack<Card>();
+    Deck(){
+        for (Rank rank : Rank.values()){
+            for(Suit suit : Suit.values()){
+                cards.add(new Card(rank, suit));
+            }
+        }
+    }
+
+    public void shuffle(){
+        Collections.shuffle(cards);
+    }
+
+    public Card getCard() {
+        return this.cards.pop();
+    }
+}
