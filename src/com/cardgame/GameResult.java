@@ -8,8 +8,6 @@ public class GameResult {
     private Player winner;
     private String resultMessage;
 
-    public GameResult(){}
-
     public GameResult(Player winner, String resultMessage) {
         this.winner = winner;
         this.resultMessage = resultMessage;
@@ -19,15 +17,8 @@ public class GameResult {
         return winner;
     }
 
-    public void setWinner(Player winner) {
-        this.winner = winner;
-    }
-
     public String getResultMessage() {
         return resultMessage;
     }
 
-    public void setResultMessage(String resultMessage) {
-        this.resultMessage = resultMessage;
-    }
 }

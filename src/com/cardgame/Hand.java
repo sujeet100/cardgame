@@ -1,9 +1,6 @@
 package com.cardgame;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -43,16 +40,16 @@ public class Hand {
     }
 
     public Rank getThreeOfAKindRank(){
-        Map<Rank, AtomicInteger> player1CardRankCounter= new HashMap<Rank, AtomicInteger>();
+        Map<Rank, AtomicInteger> cardRankCount= new HashMap<Rank, AtomicInteger>();
         for(Card card : getOrderedCards()){
-            if(player1CardRankCounter.containsKey(card.rank)){
-                player1CardRankCounter.get(card.rank).incrementAndGet();
+            if(cardRankCount.containsKey(card.rank)){
+                cardRankCount.get(card.rank).incrementAndGet();
             } else {
-                player1CardRankCounter.put(card.rank, new AtomicInteger(1));
+                cardRankCount.put(card.rank, new AtomicInteger(1));
             }
         }
-        for(Rank rank : player1CardRankCounter.keySet()){
-            if(player1CardRankCounter.get(rank).get() == 3 ){
+        for(Rank rank : cardRankCount.keySet()){
+            if(cardRankCount.get(rank).get() == 3 ){
                 return rank;
             }
         }
@@ -61,5 +58,12 @@ public class Hand {
 
     public Card highCard(){
         return Collections.max(cards);
+    }
+
+    public void addCards(ArrayList<Card> cards) {
+        if(this.cards.size() + cards.size() > size){
+            throw new RuntimeException("Cannot exceed hand size");
+        }
+        this.cards.addAll(cards);
     }
 }

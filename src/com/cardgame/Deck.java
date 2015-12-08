@@ -11,6 +11,8 @@ public class Deck {
     Deck(){
         for (Rank rank : Rank.values()){
             for(Suit suit : Suit.values()){
+                //One card can appear twice in a deck of (51*2=104) cards
+                cards.add(new Card(rank, suit));
                 cards.add(new Card(rank, suit));
             }
         }

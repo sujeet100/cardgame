@@ -19,6 +19,7 @@ public class HighCard extends AbstractGameRule {
         Collections.reverse(players);
         Player first = players.get(0);
         Player second = players.get(1);
+        //Check if winner can be decided. If not call next rule in the chain.
         if(highCardComparator.compare(first, second) != 0){
             return getResult(first, highCardComparator.highCard);
         } else if(this.getNext() != null) {
