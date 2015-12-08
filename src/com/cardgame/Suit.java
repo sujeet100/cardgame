@@ -6,8 +6,8 @@ package com.cardgame;
 public enum Suit {
     CLUB(0),
     DIAMOND(1),
-    HEART(2),
-    SPADE(3);
+    SPADE(2),
+    HEART(3);
 
     private final int value;
 
